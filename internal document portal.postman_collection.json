@@ -1,0 +1,207 @@
+{
+  "info": {
+    "_postman_id": "8ebc749c-1a41-47d9-b35f-c872b3379390",
+    "name": "internal document portal",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "7929284"
+  },
+  "item": [
+    {
+      "name": "login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"admin@workspace.com\",\r\n    \"password\": \"password\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Base URL}}/api/login",
+          "host": [
+            "{{Base URL}}"
+          ],
+          "path": [
+            "api",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "me",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_0wox}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{Base URL}}/api/me",
+          "host": [
+            "{{Base URL}}"
+          ],
+          "path": [
+            "api",
+            "me"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get doc",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_0wox}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{Base URL}}/api/documents",
+          "host": [
+            "{{Base URL}}"
+          ],
+          "path": [
+            "api",
+            "documents"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "upload doc",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_0wox}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": [
+                "/C:/Users/naylinn/Downloads/React+laravel-test_1.docx"
+              ]
+            },
+            {
+              "key": "title",
+              "value": "react laravel",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{Base URL}}/api/documents",
+          "host": [
+            "{{Base URL}}"
+          ],
+          "path": [
+            "api",
+            "documents"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "delete doc",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_0wox}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{Base URL}}/api/documents/1",
+          "host": [
+            "{{Base URL}}"
+          ],
+          "path": [
+            "api",
+            "documents",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "download",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_0wox}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{Base URL}}/api/documents/10/download",
+          "host": [
+            "{{Base URL}}"
+          ],
+          "path": [
+            "api",
+            "documents",
+            "10",
+            "download"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "auth_secret_174o",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_0wox",
+      "secret": true
+    }
+  ]
+}
