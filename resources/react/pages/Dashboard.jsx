@@ -54,14 +54,16 @@ export default function Dashboard() {
                         <h2>Administrator</h2>
 
                         <p>
-                            You are logged in as an
-                            administrator.
+                            Manage team members and create
+                            internal user accounts.
                         </p>
 
-                        <p>
-                            User management will be
-                            available here.
-                        </p>
+                        <Link
+                            to="/team-accounts"
+                            style={styles.button}
+                        >
+                            Manage Team Accounts
+                        </Link>
                     </div>
                 )}
 

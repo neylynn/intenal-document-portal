@@ -5,6 +5,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Documents from './pages/Documents';
+import TeamAccounts from './pages/TeamAccounts';
 
 function ProtectedRoute({ children }) {
     const { user, loading } = useAuth();
@@ -15,6 +16,24 @@ function ProtectedRoute({ children }) {
 
     if (!user) {
         return <Navigate to="/login" replace />;
+    }
+
+    return children;
+}
+
+function AdminRoute({ children }) {
+    const { user, loading } = useAuth();
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (!user) {
+        return <Navigate to="/login" replace />;
+    }
+
+    if (user.role !== 'admin') {
+        return <Navigate to="/dashboard" replace />;
     }
 
     return children;
@@ -51,6 +70,15 @@ function AppRoutes() {
                     <ProtectedRoute>
                         <Documents />
                     </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path="/team-accounts"
+                element={
+                    <AdminRoute>
+                        <TeamAccounts />
+                    </AdminRoute>
                 }
             />
 
