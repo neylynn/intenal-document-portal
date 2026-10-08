@@ -48,8 +48,8 @@ Project Root
 ### 1. Clone the Repository
 
 ```bash
-git clone <https://github.com/neylynn/intenal-document-portal>
-cd <intenal-document-portal>
+git clone https://github.com/neylynn/intenal-document-portal.git
+cd intenal-document-portal
 ```
 
 ### 2. Install Dependencies
@@ -70,6 +70,7 @@ On Windows CMD:
 
 ```cmd
 copy .env.example .env
+php artisan key:generate
 ```
 
 Configure your MySQL database in `.env`:
@@ -77,13 +78,32 @@ Configure your MySQL database in `.env`:
 ```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=document_portal
+DB_PORT=3307
+DB_DATABASE=internal_document_portal
 DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-### 4. Run Database Migration and Seeder
+### 4. Configure JWT
+
+Generate a secure JWT secret:
+
+```bash
+php artisan jwt:secret
+```
+
+This automatically adds/updates `JWT_SECRET` in `.env`.
+
+The JWT configuration should contain:
+
+```env
+JWT_SECRET=your_generated_secret
+JWT_ALGO=HS256
+```
+
+> Never commit your real `JWT_SECRET` or `.env` file to GitHub.
+
+### 5. Run Database Migration and Seeder
 
 ```bash
 php artisan migrate:fresh --seed
@@ -95,13 +115,13 @@ This creates:
 * 2 Members
 * 5 Sample Documents
 
-### 5. Configure Storage
+### 6. Configure Storage
 
 ```bash
 php artisan storage:link
 ```
 
-### 6. Start the Application
+### 7. Start the Application
 
 Open two terminals in the project root.
 
@@ -172,8 +192,6 @@ Authenticated User
 ```
 
 All team members can access documents uploaded by other team members.
-
-However:
 
 ```text
 User A → Can delete User A's document
@@ -293,7 +311,7 @@ After running:
 php artisan migrate:fresh --seed
 ```
 
-verify:
+Verify:
 
 1. Admin can log in.
 2. Members can log in.
@@ -310,7 +328,7 @@ verify:
 * Authentication is required for document access.
 * JWT is sent using the `Authorization: Bearer <TOKEN>` header.
 * Document ownership is checked on the backend.
-* `.env` should not be committed to GitHub.
+* `.env` and the real `JWT_SECRET` should not be committed to GitHub.
 * Test credentials are included only for project evaluation.
 
 ## GitHub Submission
